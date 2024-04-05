@@ -15,6 +15,12 @@ utils.get_entries = function(opts)
 		end, file_results)
 	end
 
+	local current_filename = vim.api.nvim_buf_get_name(0)
+
+	file_results = vim.tbl_filter(function(entry)
+		return entry.filename == current_filename
+	end, file_results)
+
 	if opts.max_depth == 0 then
 		return file_results
 	end
